@@ -1,0 +1,10 @@
+extends layout
+
+block content
+    h1= title
+    p Welcome to #{title}
+    form(method="POST",action="../../Restaurants")
+        label(for="description") Nombre
+        input(type="text",name="description")
+        
+        input(type="submit",value="Crear restaurante")
