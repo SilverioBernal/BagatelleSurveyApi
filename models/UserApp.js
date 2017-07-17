@@ -7,6 +7,9 @@ var UserApp = {
     getUserAppById:function(id, callback){
         return db.query("select id, description, rolMesero, rolAdmin, cast(aes_decrypt(password,  UNHEX(SHA2('My secret passphrase',512))) as char) password, active  from AppUser where id = ?",[id], callback);
     },
+    getUserAppByCredentials:function(id, password, callback){
+        return db.query("select id, description, rolMesero, rolAdmin from AppUser where id = ? and cast(aes_decrypt(password,  UNHEX(SHA2('My secret passphrase',512))) as char) = ?",[id, password], callback);
+    },
     addUserApp:function(UserApp, callback){
         return db.query("insert into AppUser set ?",[UserApp], callback);
     },
